@@ -23,8 +23,20 @@ h2 {
 .block-example {
   position: relative;
   padding: 10px;
+  padding-top: 20px;
   border: 2px solid #eee;
   margin-bottom: 5px;
+}
+
+.block-example-modifier {
+  position: absolute;
+  right: 0;
+  top: 0;
+  background: #aaa;
+  color: white;
+  padding: 2px 3px;
+  font-style: normal;
+  font-size: 11px;
 }
 
 .block-modifiers {
@@ -80,6 +92,7 @@ html = """
         </div>
         {% for mod in block.modifiers %}
           <div class="block-example">
+            <em class="block-example-modifier">{{ mod.klass }}</em>
             {{ block.example.replace('$modifier', mod.markup_class) }}
           </div>
         {% endfor %}
