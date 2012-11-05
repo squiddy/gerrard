@@ -1,8 +1,13 @@
 body {
-  background: none;
+  background: #eee;
+}
+
+.container {
+  background: #fff;
   color: black;
-  padding: 20px;
-  padding-left: 200px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  margin-left: 200px;
   width: 600px;
 }
 
@@ -11,10 +16,20 @@ h2 {
   padding: 3px;
   border-bottom: 5px solid #A7DBD8;
   background: #69D2E7;
+  margin-left: -80px;
+  margin-right: -30px;
+}
+
+h2 .section {
+  width: 80px;
+  display: inline-block;
+  text-align: right;
+  padding-right: 5px;
 }
 
 .block {
   padding: 0px 10px;
+  margin-bottom: 30px;
 }
 
 .block-example {
