@@ -1,7 +1,6 @@
-import functools
+import itertools
 import re
 from collections import namedtuple
-from itertools import takewhile
 
 
 Modifier = namedtuple("Modifier", "klass description")
@@ -41,30 +40,29 @@ def _parse_block(lines):
     example = []
     section = ""
 
-    until_blank = functools.partial(takewhile, lambda x: x!= '')
+    # group lines without an empty line in between into lists
+    groups = itertools.groupby(lines, key=lambda x: x == '')
+    groups = [list(b) for (blankline, b) in groups if not blankline]
+    groups.reverse()
 
-    it = iter(lines)
-    try:
-        name = next(it)
-        next(it)
+    name = groups.pop()
+    if len(name) > 1:
+        raise ParseError("Name can only be one line")
+    name = name[0]
 
-        description = list(until_blank(it))
+    while True:
+        next_group = groups.pop()
+        lookup = next_group[0][0]
 
-        line = next(it)
-        if line.startswith('.'):
-            # modifiers
-            modifiers.append(_parse_modifier(line))
-            modifiers.extend(_parse_modifier(l) for l in until_blank(it))
+        if lookup == '<':
+            example = next_group
+        elif lookup in ('.', ':'):
+            modifiers = [_parse_modifier(l) for l in next_group]
+        elif not groups:
+            section = next_group[0].split(' ')[1]
+            break
         else:
-            # no modifiers, line belongs to example
-            example.append(line)
-
-        example.extend(until_blank(it))
-
-        section = next(it)
-        section = section.split(' ')[1]
-    except StopIteration:
-        raise ParseError()
+            description = next_group
 
     return Block(name, '\n'.join(description), modifiers, '\n'.join(example), section)
 

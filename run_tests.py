@@ -110,6 +110,54 @@ div {}
         self.assertEqual(block.example, "<div>\n  Foobar\n</div>")
         self.assertEqual(block.section, "1.2")
 
+    def test_parse_block_without_description(self):
+        f = StringIO.StringIO("""
+// Name
+//
+// .modifier1 - Modifier1
+//
+// <div>
+//   Foobar
+// </div>
+//
+// Styleguide 1.2
+.foobar {
+
+}
+        """)
+
+        blocks = parse(f)
+        self.assertEqual(len(blocks), 1)
+        block = blocks[0]
+
+        self.assertEqual(block.name, "Name")
+        self.assertEqual(block.description, "")
+        self.assertEqual(len(block.modifiers), 1)
+        self.assertEqual(block.modifiers[0].klass, ".modifier1")
+        self.assertEqual(block.modifiers[0].description, "Modifier1")
+        self.assertEqual(block.example, "<div>\n  Foobar\n</div>")
+        self.assertEqual(block.section, "1.2")
+
+    def test_parse_minimal_block(self):
+        f = StringIO.StringIO("""
+// Name
+//
+// Styleguide 1.2
+.foobar {
+
+}
+        """)
+
+        blocks = parse(f)
+        self.assertEqual(len(blocks), 1)
+        block = blocks[0]
+
+        self.assertEqual(block.name, "Name")
+        self.assertEqual(block.description, "")
+        self.assertEqual(len(block.modifiers), 0)
+        self.assertEqual(block.example, "")
+        self.assertEqual(block.section, "1.2")
+
 
 if __name__ == '__main__':
     unittest.main()
