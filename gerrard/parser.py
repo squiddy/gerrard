@@ -3,7 +3,17 @@ import re
 from collections import namedtuple
 
 
-Modifier = namedtuple("Modifier", "klass description")
+class Modifier(namedtuple("Modifier", "klass description")):
+
+    @property
+    def markup_class(self):
+        """Class to be used when generating html."""
+        if self.klass.startswith('.'):
+            return self.klass[1:]
+
+        return self.klass
+
+
 Block = namedtuple("Block", "name description modifiers example section")
 
 modifier_re = re.compile(r'^((?:\.|:)\S+)\s+-\s(.+)$')
