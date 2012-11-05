@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>gerrard</title>
+    <link rel="stylesheet" href="{{ css_file }}" />
+    <style>
+      {% include 'style.css' %}
+    </style>
+    <style>
+      {{ pygments_highlight }}
+    </style>
+  </head>
+  <body>
+    <h1>Styleguide</h1>
+
+    {% for block in blocks %}
+      <h2>{{ block.section }} {{ block.name }}</h2>
+      <div class="block">
+
+      {% if block.description %}
+        <p>{{ block.description }}</p>
+      {% endif %}
+
+      {% if block.modifiers %}
+        <table class="block-modifiers">
+          {% for mod in block.modifiers %}
+          <tr>
+            <td>{{ mod.klass }}</td><td>{{ mod.description }}</td>
+          </tr>
+          {% endfor %}
+        </table>
+      {% endif %}
+
+      {% if block.example %}
+        <div class="block-example">
+          {{ block.example.replace('$modifier', '') }}
+        </div>
+        {% for mod in block.modifiers %}
+          <div class="block-example">
+            <em class="block-example-modifier">{{ mod.klass }}</em>
+            {{ block.example.replace('$modifier', mod.markup_class) }}
+          </div>
+        {% endfor %}
+        <code>{{ block.example|highlight_html }}</code>
+      {% endif %}
+      </div>
+    {% endfor %}
+
+  </body>
+</html>

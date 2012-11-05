@@ -1,0 +1,51 @@
+body {
+  background: none;
+  color: black;
+  padding: 20px;
+  padding-left: 200px;
+  width: 600px;
+}
+
+h2 {
+  color: #fff;
+  padding: 3px;
+  border-bottom: 5px solid #A7DBD8;
+  background: #69D2E7;
+}
+
+.block {
+  padding: 0px 10px;
+}
+
+.block-example {
+  position: relative;
+  padding: 10px;
+  padding-top: 20px;
+  border: 2px solid #eee;
+  margin-bottom: 5px;
+}
+
+.block-example-modifier {
+  position: absolute;
+  right: 0;
+  top: 0;
+  background: #aaa;
+  color: white;
+  padding: 2px 3px;
+  font-style: normal;
+  font-size: 11px;
+}
+
+.block-modifiers {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.block-modifiers td:first-child {
+  width: 30%;
+}
+
+code pre {
+  background: #E0E4CC;
+  padding: 10px;
+}
