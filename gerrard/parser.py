@@ -7,7 +7,7 @@ from itertools import takewhile
 Modifier = namedtuple("Modifier", "klass description")
 Block = namedtuple("Block", "name description modifiers example section")
 
-modifier_re = re.compile(r'^(\.\S+)\s+-\s(.+)$')
+modifier_re = re.compile(r'^((?:\.|:)\S+)\s+-\s(.+)$')
 
 class ParseError(Exception): pass
 
