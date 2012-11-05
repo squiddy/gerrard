@@ -40,10 +40,12 @@ div {}
         self.assertEqual(mod.klass, ".foobar-baz")
         self.assertEqual(mod.description, "Test-3")
 
+    def test_parse_pseudo_class_modifier(self):
         mod = _parse_modifier(":hover - Test-4")
         self.assertEqual(mod.klass, ":hover")
         self.assertEqual(mod.description, "Test-4")
 
+    def test_incomplete_modifier_raises_error(self):
         self.assertRaises(ParseError, _parse_modifier, ".foobar")
         self.assertRaises(ParseError, _parse_modifier, ".foobar - ")
 
