@@ -1,4 +1,11 @@
-from jinja2 import Template
+from jinja2 import Environment
+from pygments import highlight
+from pygments.formatters import HtmlFormatter
+from pygments.lexers import HtmlLexer
+
+
+env = Environment()
+
 
 style = """
 body {
@@ -64,6 +71,9 @@ html = """
     <style>
       {{ base_style }}
     </style>
+    <style>
+      {{ pygments_highlight }}
+    </style>
   </head>
   <body>
     <h1>Styleguide</h1>
@@ -96,7 +106,7 @@ html = """
             {{ block.example.replace('$modifier', mod.markup_class) }}
           </div>
         {% endfor %}
-        <code><pre>{{ block.example|escape }}</pre></code>
+        <code>{{ block.example|highlight_html }}</code>
       {% endif %}
       </div>
     {% endfor %}
@@ -105,6 +115,19 @@ html = """
 </html>
 """
 
+def highlight_html(value):
+    return highlight(value, HtmlLexer(), HtmlFormatter())
+
+env.filters['highlight_html'] = highlight_html
+
+
 def generate(css_file, blocks):
-    template = Template(html)
-    return template.render(css_file=css_file, blocks=blocks, base_style=style)
+    template = env.from_string(html)
+    context = {
+        'css_file': css_file,
+        'blocks': blocks,
+        'base_style': style,
+        'pygments_highlight': HtmlFormatter().get_style_defs('.highlight')
+
+    }
+    return template.render(**context)
