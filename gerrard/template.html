@@ -14,11 +14,20 @@
     <div class="container">
 
     {% for block in blocks %}
-      <h2>
-        <a href="#{{ block.section }}" name="{{ block.section }}">
-          <span class="section">{{ block.section }}</span> {{ block.name }}
-        </a>
-      </h2>
+      {% if block.is_module %}
+        <h2 class="section module">
+          <a href="#{{ block.section }}" name="{{ block.section }}">
+            <span class="section-number">{{ block.section }}</span> {{ block.name }}
+          </a>
+        </h2>
+      {% else %}
+        <h3 class="section">
+          <a href="#{{ block.section }}" name="{{ block.section }}">
+            <span class="section-number">{{ block.section }}</span> {{ block.name }}
+          </a>
+        </h3>
+      {% endif %}
+
       <div class="block">
 
       {% if block.description %}

@@ -62,6 +62,7 @@ Styleguide 1.2
         self.assertEqual(block.modifiers[1].description, "Modifier2")
         self.assertEqual(block.example, "<div>\n  Foobar\n</div>")
         self.assertEqual(block.section, "1.2")
+        self.assertFalse(block.is_module)
 
     def test_parse_block_without_modifiers(self):
         value = """
@@ -84,6 +85,7 @@ Styleguide 1.2
         self.assertEqual(len(block.modifiers), 0)
         self.assertEqual(block.example, "<div>\n  Foobar\n</div>")
         self.assertEqual(block.section, "1.2")
+        self.assertFalse(block.is_module)
 
     def test_parse_block_without_description(self):
         value = """
@@ -107,6 +109,7 @@ Styleguide 1.2
         self.assertEqual(block.modifiers[0].description, "Modifier1")
         self.assertEqual(block.example, "<div>\n  Foobar\n</div>")
         self.assertEqual(block.section, "1.2")
+        self.assertFalse(block.is_module)
 
     def test_parse_minimal_block(self):
         value = """
@@ -122,6 +125,7 @@ Styleguide 1.2
         self.assertEqual(len(block.modifiers), 0)
         self.assertEqual(block.example, "")
         self.assertEqual(block.section, "1.2")
+        self.assertTrue(block.is_module)
 
 
 class ParserTest(unittest.TestCase):

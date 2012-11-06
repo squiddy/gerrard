@@ -84,6 +84,14 @@ class Block(namedtuple("Block", "name description modifiers example section")):
 
         return cls(name, description, modifiers, example, section)
 
+    @property
+    def is_module(self):
+        """Handle blocks with only name, section and possibly description as module.
+
+        A module is a group with several blocks.
+        """
+        return not self.modifiers and not self.example
+
 
 def _extract_blocks(file_obj):
     """Yields groups of lines that match the block spec."""
