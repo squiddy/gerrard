@@ -14,7 +14,11 @@
     <div class="container">
 
     {% for block in blocks %}
-      <h2><span class="section">{{ block.section }}</span> {{ block.name }}</h2>
+      <h2>
+        <a href="#{{ block.section }}" name="{{ block.section }}">
+          <span class="section">{{ block.section }}</span> {{ block.name }}
+        </a>
+      </h2>
       <div class="block">
 
       {% if block.description %}
@@ -25,7 +29,10 @@
         <table class="block-modifiers">
           {% for mod in block.modifiers %}
           <tr>
-            <td>{{ mod.klass }}</td><td>{{ mod.description }}</td>
+            <td>
+              <a href="#{{ block.section }}-{{ mod.markup_class }}">{{ mod.klass }}</a>
+            </td>
+            <td>{{ mod.description }}</td>
           </tr>
           {% endfor %}
         </table>
@@ -37,7 +44,7 @@
         </div>
         {% for mod in block.modifiers %}
           <div class="block-example">
-            <em class="block-example-modifier">{{ mod.klass }}</em>
+            <a href="#{{ block.section }}-{{ mod.markup_class }}" name="{{ block.section}}-{{ mod.markup_class }}" class="block-example-modifier">{{ mod.klass }}</a>
             {{ block.example.replace('$modifier', mod.markup_class) }}
           </div>
         {% endfor %}

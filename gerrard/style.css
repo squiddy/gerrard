@@ -18,6 +18,16 @@ h2 {
   background: #69D2E7;
   margin-left: -80px;
   margin-right: -30px;
+  text-shadow: 1px 1px 1px #555;
+}
+
+h2 a,
+h2 a:hover,
+h2 a:visited,
+h2 a:hover:visited {
+  color: #fff;
+  text-decoration: none;
+  display: block;
 }
 
 h2 .section {
@@ -49,15 +59,31 @@ h2 .section {
   padding: 2px 3px;
   font-style: normal;
   font-size: 11px;
+  font-family: monospace;
+}
+
+.block-example-modifier:active,
+.block-example-modifier:visited {
+  color: white;
 }
 
 .block-modifiers {
   width: 100%;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
+}
+
+.block-modifiers tr:nth-child(odd) {
+  background: #f9f9f9;
 }
 
 .block-modifiers td:first-child {
   width: 30%;
+  font-family: monospace;
+}
+
+.block-modifiers a,
+.block-modifiers a:visited {
+  color: black;
 }
 
 code pre {
