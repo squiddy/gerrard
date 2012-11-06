@@ -11,6 +11,17 @@
     </style>
   </head>
   <body>
+    <aside>
+      <ul class="toc">
+      {% for block in blocks %}
+        <li>
+          <a href="#{{ block.section }}">
+            <span class="toc-section">{{ block.section }}</span> {{ block.name }}
+          </a>
+        </li>
+      {% endfor %}
+    </aside>
+
     <div class="container">
 
     {% for block in blocks %}

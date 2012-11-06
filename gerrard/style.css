@@ -100,3 +100,29 @@ code pre {
   border: 2px dotted #e0e4cc;
   padding: 10px;
 }
+
+aside {
+  position: fixed;
+  margin-left: 900px;
+  background: white;
+  padding: 10px;
+  height: 100%;
+}
+
+.toc {
+  list-style: none;
+  padding-left: 10px;
+}
+
+.toc a {
+  color: black;
+}
+
+.toc li {
+  margin-bottom: 4px;
+}
+
+.toc-section {
+  width: 50px;
+  display: inline-block;
+}
