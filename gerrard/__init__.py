@@ -1,2 +1,2 @@
 from .parser import parse, ParseError
-from .generator import generate
+from .generator import generate, Styleguide
