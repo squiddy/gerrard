@@ -87,6 +87,6 @@ h2 .section {
 }
 
 code pre {
-  background: #E0E4CC;
+  border: 2px dotted #e0e4cc;
   padding: 10px;
 }
